@@ -1,0 +1,16 @@
+language: go
+go:
+ - "1.x"
+
+os: osx
+
+install: true
+
+env:
+  global:
+    - CODECOV_TOKEN="2224d1cc-b617-4971-afcb-361f719345ba"
+
+script: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
