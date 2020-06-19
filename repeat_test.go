@@ -5,11 +5,11 @@ import (
 	"reflect"
 	"testing"
 
+	"pipelined.dev/repeat"
+
 	"pipelined.dev/pipe"
 	"pipelined.dev/pipe/mock"
 	"pipelined.dev/pipe/mutability"
-
-	"pipelined.dev/audio/repeat"
 )
 
 const bufferSize = 512

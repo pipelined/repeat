@@ -1,4 +1,4 @@
-module pipelined.dev/audio/repeat
+module pipelined.dev/repeat
 
 go 1.14
 
