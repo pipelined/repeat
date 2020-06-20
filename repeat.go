@@ -1,3 +1,4 @@
+// Package repeat provides DSP repeater component.
 package repeat
 
 import (
@@ -12,7 +13,7 @@ import (
 	"pipelined.dev/signal"
 )
 
-// Repeater sinks the signal and sources it to multiple lines.
+// Repeater sinks the signal and sources it to multiple pipelines.
 type Repeater struct {
 	mutability.Mutability
 	bufferSize int
@@ -26,7 +27,7 @@ type message struct {
 	sources int32
 }
 
-// Sink must be called once per broadcast.
+// Sink must be called once per repeater.
 func (r *Repeater) Sink() pipe.SinkAllocatorFunc {
 	return func(bufferSize int, props pipe.SignalProperties) (pipe.Sink, error) {
 		r.sampleRate = props.SampleRate
@@ -61,7 +62,7 @@ func (r *Repeater) Sink() pipe.SinkAllocatorFunc {
 	}
 }
 
-// AddLine adds the line to the repeater.
+// AddLine adds the line to the repeater. Will panic if repeater is immutable.
 func (r *Repeater) AddLine(p pipe.Pipe, route pipe.Routing) mutability.Mutation {
 	return r.Mutability.Mutate(func() error {
 		route.Source = r.Source()
